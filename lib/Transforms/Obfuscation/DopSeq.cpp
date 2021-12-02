@@ -72,7 +72,7 @@ namespace {
                     }
                 }
             }
-	    Function::iterator bb = F.begin();
+	        Function::iterator bb = F.begin();
             preBB = bb;
             Twine *var1 = new Twine("obfBB");
             obfBB = bb->splitBasicBlock(preBBend, *var1);
@@ -112,11 +112,11 @@ namespace {
             }
 
             // Map instructions in obfBB and alterBB
-	    std::map<Instruction*, Instruction*> fixssa;
+	        std::map<Instruction*, Instruction*> fixssa;
             for (BasicBlock::iterator i = obfBB->begin(), j = alterBB->begin(),
                                       e = obfBB->end(), f = alterBB->end(); i != e && j != f; ++i, ++j) {
-	      // errs() << "install fix ssa:" << "\n";
-	      fixssa[i] = j;
+	        // errs() << "install fix ssa:" << "\n";
+	        fixssa[i] = j;
             }
             // Fix use values in alterBB
             for (BasicBlock::iterator i = alterBB->begin(), e = alterBB->end() ; i != e; ++i) {
@@ -128,10 +128,10 @@ namespace {
                 }
             }
             // for (std::map<Instruction*, Instruction*>::iterator it = fixssa.begin(), e = fixssa.end(); it != e; ++it) {
-	    //   errs() << "print fix ssa:" << "\n";
-	    //   errs() << "    " << it->first->getOpcodeName() << "\n";
-	    //   errs() << "    " << it->second->getOpcodeName() << "\n";
-	    // }
+	        //   errs() << "print fix ssa:" << "\n";
+	        //   errs() << "    " << it->first->getOpcodeName() << "\n";
+	        //   errs() << "    " << it->second->getOpcodeName() << "\n";
+	        // }
 
             // create the first dop at the end of preBB
             Twine * var3 = new Twine("dopbranch1");
@@ -145,9 +145,9 @@ namespace {
 	                         splitpt2 = alterBB->begin();
             BasicBlock *obfBB2, *alterBB2;
             int num = 2;
-	    int n = num;
+	        int n = num;
             for (BasicBlock::iterator e = obfBB->end(); splitpt1 != e && n > 0; ++splitpt1, --n) ;
-	    n = num+1;
+	        n = num+1;
             for (BasicBlock::iterator e = alterBB->end(); splitpt2 != e && n > 0; ++splitpt2, --n) ;
             Twine *var4 = new Twine("obfBB2");
             obfBB2 = obfBB->splitBasicBlock(splitpt1, *var4);
@@ -177,7 +177,7 @@ namespace {
                 for(User::op_iterator opi = i->op_begin (), ope = i->op_end(); opi != ope; ++opi) {
                     Instruction *p;
                     Instruction *vi = dyn_cast<Instruction>(*opi);
-		    PHINode *q;
+		            PHINode *q;
                     if (fixssa.find(vi) != fixssa.end()) {
                         PHINode *fixnode;
                         p = fixssa[vi];
